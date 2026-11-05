@@ -16,6 +16,10 @@ Demo tampilan baru DramaMalku — terpisah dari situs live di
   stream asli per episode dari endpoint `get-episode`. Bila API menolak
   (mis. 403 dari IP pusat data), tampil status gagal beserta tombol
   Coba lagi. 8 platform lain menampilkan keadaan kosong.
+- Pengurai katalog Melolo menelusuri seluruh respons API dan mengenali
+  buku dengan berbagai nama field, dengan umpan cadangan `foryou` bila
+  `trending` dan `get-latest` kosong; bilah status menyebut penyebab
+  sebenarnya (kode HTTP per endpoint, atau data tidak dikenali).
 - Platform dan halaman yang sedang dibuka tertulis di URL (mis.
   `#beranda-melolo`), jadi refresh membuka kembali halaman dan platform
   yang sama, bukan kembali ke Demo; daftar episode dimuat ulang dari API
