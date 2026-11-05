@@ -7,19 +7,23 @@ Demo tampilan baru DramaMalku — terpisah dari situs live di
 - Platform **Demo** adalah default saat beranda dibuka: 9 judul,
   poster asli Melolo yang ditanam di dalam demo, data episode, status,
   dan sinopsis adalah **data dummy khusus demo**.
-- Platform **Melolo** adalah live seperti situs dramamalku.ai.id:
-  mengambil data asli dari API Sansekai
-  (`api.sansekai.my.id/api/melolo/trending` dan `get-latest`) langsung
-  dari browser; poster dilewatkan proksi gambar wsrv.nl (seperti situs
-  live, karena CDN Melolo menolak pemuatan langsung); halaman detail
-  memuat sinopsis, sampul, dan daftar episode asli; pemutar mengambil
-  stream asli per episode dari endpoint `get-episode`. Bila API menolak
-  (mis. 403 dari IP pusat data), tampil status gagal beserta tombol
-  Coba lagi. 8 platform lain menampilkan keadaan kosong.
-- Pengurai katalog Melolo menelusuri seluruh respons API dan mengenali
-  buku dengan berbagai nama field, dengan umpan cadangan `foryou` bila
-  `trending` dan `get-latest` kosong; bilah status menyebut penyebab
-  sebenarnya (kode HTTP per endpoint, atau data tidak dikenali).
+- Platform **Melolo** adalah live dan menampilkan drama BERBAHASA
+  INDONESIA (keputusan Elnath 5 Nov 2026): mengambil data asli dari
+  APIShort (`apishort.com/v1/melolo/...`, parameter `lang=id`)
+  langsung dari browser, TANPA API key (endpoint ini bisa diakses
+  anonim, CORS terbuka; batas 100 request/hari per IP pengunjung).
+  Katalog dari `api/home` (offset 0 dan 18, dua seksi beranda),
+  detail + daftar episode dari `api/detail/{id}`, stream per episode
+  dari `api/video?id=&ep=`. Bila API menolak, tampil status gagal
+  beserta tombol Coba lagi. 8 platform lain menampilkan keadaan
+  kosong.
+- APIShort tidak memberi status (Berlanjut/Tamat) dan genre, jadi
+  detail Melolo tidak menampilkan chip status dan chip genre. Poster
+  dari APIShort sudah berupa URL wsrv.nl bertanda tangan — dipakai
+  apa adanya; penulisan ulang path `novel-images-apsoutheast` menjadi
+  `novel-images-sg` hanya berlaku untuk URL yang belum lewat wsrv.nl
+  (peninggalan jalur tmtreader) dan dilewati bila URL sudah diawali
+  `https://wsrv.nl/`.
 - Platform dan halaman yang sedang dibuka tertulis di URL (mis.
   `#beranda-melolo`), jadi refresh membuka kembali halaman dan platform
   yang sama, bukan kembali ke Demo; daftar episode dimuat ulang dari API
@@ -27,18 +31,18 @@ Demo tampilan baru DramaMalku — terpisah dari situs live di
 - Video di player untuk judul **Demo** adalah video contoh (film pendek
   Blender Studio), **bukan episode asli** dramanya; judul Melolo memakai
   stream asli.
-- Melolo memakai jalur langsung dari API resmi aplikasi Melolo
-  (`api.tmtreader.com`) lewat fungsi serverless `api/tmt.js` di repo
-  ini — TANPA mencoba Sansekai dulu (keputusan Elnath 5 Nov 2026).
-  Halaman demo tidak bisa memanggil API itu langsung dari browser
-  (request ber-Origin dibalas 403), jadi fungsi server-side yang
-  meneruskannya. Katalog diambil dari pencarian kata kunci (jalur ini
-  tidak punya feed latest/trending), detail + daftar episode dari
-  `directory`, stream MP4 langsung (360p–720p, codec bytevc1) dari
-  `video_model`. Bilah status menyebut "Terhubung ke Melolo langsung".
-  Poster: URL gambar yang ber-path `novel-images-apsoutheast` ditulis
-  ulang menjadi `novel-images-sg` (hash sama) karena CDN menolak path
-  apsoutheast (HTTP 400) sementara path sg memuat normal.
+- RIWAYAT SUMBER MELOLO: Sansekai (30 Okt–5 Nov 2026) lalu tmtreader
+  langsung (`api.tmtreader.com` lewat fungsi serverless `api/tmt.js`,
+  TANPA mencoba Sansekai dulu — keputusan Elnath 5 Nov 2026). Keduanya
+  hanya memberi katalog BERBAHASA INGGRIS: pencarian tmtreader dengan
+  kata kunci Indonesia mengembalikan 0 hasil dan parameter `lang=id`
+  diabaikan. Sejak 5 Nov 2026 Melolo memakai APIShort `lang=id`
+  (lihat di atas). Fungsi `api/tmt.js` masih ada di repo tapi sudah
+  tidak dipakai halaman demo; bilah status menyebut "Terhubung ke
+  Melolo (Indonesia)". Video Melolo tetap tidak bisa diputar di
+  browser HP Android 11 Elnath: stream-nya HEVC (bytevc1) dan medianya
+  terenkripsi CENC — APIShort memberi kunci dekripsinya, tapi hasil
+  dekripsi tetap HEVC.
 - Deploy di Vercel: situs statis (root directory repo ini, tanpa build
   command) + fungsi serverless dari folder `api/`.
 
