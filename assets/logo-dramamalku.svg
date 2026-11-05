@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162 180" role="img" aria-label="Jiplakan mark screenshot, proporsi simetris">
+  <polygon points="10,15 148,20 112,70 150,90 112,110 148,160 10,165" fill="none" stroke="#F0B429" stroke-width="8" stroke-linejoin="round"/>
+  <line x1="10" y1="15" x2="112" y2="70" stroke="#F0B429" stroke-width="8" stroke-linecap="round"/>
+  <line x1="10" y1="165" x2="112" y2="110" stroke="#F0B429" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="40,64 40,117 86,90" fill="none" stroke="#F0B429" stroke-width="7" stroke-linejoin="round"/>
+</svg>
