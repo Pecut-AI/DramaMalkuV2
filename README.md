@@ -36,6 +36,9 @@ Demo tampilan baru DramaMalku — terpisah dari situs live di
   tidak punya feed latest/trending), detail + daftar episode dari
   `directory`, stream MP4 langsung (360p–720p, codec bytevc1) dari
   `video_model`. Bilah status menyebut "Terhubung ke Melolo langsung".
+  Poster: URL gambar yang ber-path `novel-images-apsoutheast` ditulis
+  ulang menjadi `novel-images-sg` (hash sama) karena CDN menolak path
+  apsoutheast (HTTP 400) sementara path sg memuat normal.
 - Deploy di Vercel: situs statis (root directory repo ini, tanpa build
   command) + fungsi serverless dari folder `api/`.
 
