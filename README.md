@@ -24,10 +24,20 @@ Demo tampilan baru DramaMalku — terpisah dari situs live di
   `#beranda-melolo`), jadi refresh membuka kembali halaman dan platform
   yang sama, bukan kembali ke Demo; daftar episode dimuat ulang dari API
   saat halaman detail dibuka kembali.
-- Video di player adalah video contoh (film pendek Blender Studio),
-  **bukan episode asli** dramanya.
-- Deploy di Vercel sebagai situs statis: root directory repo ini,
-  tanpa build command.
+- Video di player untuk judul **Demo** adalah video contoh (film pendek
+  Blender Studio), **bukan episode asli** dramanya; judul Melolo memakai
+  stream asli.
+- Melolo memakai jalur langsung dari API resmi aplikasi Melolo
+  (`api.tmtreader.com`) lewat fungsi serverless `api/tmt.js` di repo
+  ini — TANPA mencoba Sansekai dulu (keputusan Elnath 5 Nov 2026).
+  Halaman demo tidak bisa memanggil API itu langsung dari browser
+  (request ber-Origin dibalas 403), jadi fungsi server-side yang
+  meneruskannya. Katalog diambil dari pencarian kata kunci (jalur ini
+  tidak punya feed latest/trending), detail + daftar episode dari
+  `directory`, stream MP4 langsung (360p–720p, codec bytevc1) dari
+  `video_model`. Bilah status menyebut "Terhubung ke Melolo langsung".
+- Deploy di Vercel: situs statis (root directory repo ini, tanpa build
+  command) + fungsi serverless dari folder `api/`.
 
 Situs live DramaMalku (9 platform, data asli API Sansekai) tetap berada
 di repo `Pecut-AI/Drama-Malku` dan tidak disentuh oleh repo ini.
