@@ -4,8 +4,14 @@ Demo tampilan baru DramaMalku — terpisah dari situs live di
 [dramamalku.ai.id](https://dramamalku.ai.id).
 
 - Satu halaman statis (`index.html`, tanpa build step).
-- Melolo saja, 9 judul, poster asli Melolo yang ditanam di dalam demo.
-- Data episode, status, dan sinopsis adalah **data dummy khusus demo**.
+- Platform **Demo** adalah default saat beranda dibuka: 9 judul,
+  poster asli Melolo yang ditanam di dalam demo, data episode, status,
+  dan sinopsis adalah **data dummy khusus demo**.
+- Platform **Melolo** mencoba mengambil data asli dari API Sansekai
+  (`api.sansekai.my.id/api/melolo/trending` dan `get-latest`) langsung
+  dari browser; bila API menolak (mis. 403 dari IP pusat data), tampil
+  status gagal beserta tombol Coba lagi. 8 platform lain menampilkan
+  keadaan kosong.
 - Video di player adalah video contoh (film pendek Blender Studio),
   **bukan episode asli** dramanya.
 - Deploy di Vercel sebagai situs statis: root directory repo ini,
